@@ -1,0 +1,7 @@
+rules:
+  - id: no-md5
+    languages:
+      - python
+    severity: ERROR
+    message: MD5 is prohibited for security-sensitive use
+    pattern: hashlib.md5(...)

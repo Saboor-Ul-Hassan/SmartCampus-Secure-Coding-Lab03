@@ -1,0 +1,26 @@
+LAB 03 - FINDINGS ANALYSIS
+Scenario 2: SmartCampus Fee Payment Service
+
+Semgrep Detected Findings: 8
+
+1. Hardcoded Flask Secret - A02
+2. Hardcoded Gateway Token - A02
+3. SQL Injection - A03
+4. MD5 Usage - A02
+5. TLS Verification Disabled - A02
+6. Unsafe eval() - A03
+7. Unsafe pickle.loads() - A08
+8. Debug Mode Enabled - A05
+
+Additional Logical Vulnerabilities:
+
+9. Receipt Path Traversal - A01
+10. Missing Student Ownership Check - A01
+11. Missing Bursar Authorization - A01
+
+Total Identified Vulnerabilities: 11
+
+Note:
+Semgrep automatically detected 8 findings.
+Three additional logical vulnerabilities were identified
+through manual security analysis.

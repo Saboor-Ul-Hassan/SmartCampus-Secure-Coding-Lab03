@@ -1,0 +1,65 @@
+rules:
+  - id: python-hardcoded-secret
+    languages: [python]
+    severity: ERROR
+    message: Hardcoded secret detected
+    pattern: $APP.secret_key = "..."
+
+  - id: python-hardcoded-token
+    languages: [python]
+    severity: ERROR
+    message: Hardcoded payment token
+    pattern: GATEWAY_TOKEN = "..."
+
+  - id: python-md5
+    languages: [python]
+    severity: ERROR
+    message: MD5 is insecure
+    pattern: hashlib.md5(...)
+
+  - id: python-eval
+    languages: [python]
+    severity: ERROR
+    message: Avoid eval on user input
+    pattern: eval(...)
+
+  - id: python-pickle-loads
+    languages: [python]
+    severity: ERROR
+    message: Unsafe deserialization
+    pattern: pickle.loads(...)
+
+  - id: python-requests-verify-false
+    languages: [python]
+    severity: ERROR
+    message: TLS certificate verification disabled
+    pattern: requests.$METHOD(..., verify=False, ...)
+
+  - id: python-shell-true
+    languages: [python]
+    severity: ERROR
+    message: Shell execution is dangerous
+    pattern: subprocess.$METHOD(..., shell=True, ...)
+
+  - id: python-sql-string
+    languages: [python]
+    severity: ERROR
+    message: SQL query uses string interpolation
+    patterns:
+      - pattern: $DB.execute($QUERY)
+      - metavariable-pattern:
+          metavariable: $QUERY
+          patterns:
+            - pattern: f"..."
+
+  - id: python-dangerous-template
+    languages: [python]
+    severity: ERROR
+    message: User input in dynamic template
+    pattern: render_template_string(... + request.$METHOD(...))
+
+  - id: python-debug-enabled
+    languages: [python]
+    severity: WARNING
+    message: Debug mode must be disabled
+    pattern: app.run(..., debug=True, ...)
